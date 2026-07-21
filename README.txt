@@ -1,5 +1,1 @@
-OPEN index.html ONLY
-
-PLEASE DOWNLOAD THE
-FILE FOR THE NAV BAR
-TO WORK
+OPEN LINK: https://zzzsleepyy.github.io/Portfolio/
