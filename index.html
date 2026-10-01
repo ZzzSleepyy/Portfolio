@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            scroll-padding-top: 64px;
+        }
+
+        @media (max-width: 600px) {
+            html {
+                scroll-padding-top: 55px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: linear-gradient(30deg, #182C51, #09101e);
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #070b13;
+            opacity: 10;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .nav-left {
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff; 
+            text-decoration: none;
+        }
+
+        .logo {
+            display: none;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .nav-right {
+            display: flex; 
+            gap: 40px; 
+        }
+
+        .nav-right a {
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff; 
+            font-size: 23px;
+            position: relative;
+        }
+
+        .nav-right a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background-color: #007BFF;
+            transition: width 0.3s ease;
+        }
+
+        .nav-right a:hover {
+            color: #007BFF;
+        }
+
+        .nav-right a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 600px) { 
+            .logo {
+                display: block;
+            }
+
+            .linyard-container {
+                width: auto;
+            }
+
+            .nav-right {
+                display: none;
+                flex-direction: column;
+                background-color: #070b13;
+                padding: 20px;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 250px;
+                box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.3);
+                z-index: 10;
+            }
+
+            .nav-right.active {
+                display: flex;
+            }
+
+            .nav-right a {
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 600px) { 
+            .lanyard {
+                width: 350px;
+            }
+        }
+
+        /* Stars */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: transparent;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .star:nth-child(odd) {
+            animation-duration: 3s;
+        }
+
+        .star:nth-child(even) {
+            animation-duration: 4s;
+        }
+
+        /* Home Center */
+        .home-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            height: calc(100vh - 65px);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+
+
+        /* Wrapper */
+        .moon-container {
+            position: absolute;
+            left: 10%; 
+            top: 20%; 
+            transform: translateY(-50%);
+        }
+
+        .both-container {
+            position: relative; 
+            margin-top: 30px; 
+        }
+
+        /* Moon */
+        .moon {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 10px #f9f3f2, 0 0 80px 8px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .crater {
+            position: absolute;
+            border-radius: 50%;
+            background: #eeeef1;
+            opacity: 0.8;
+        }
+
+        .crater:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            top: 20%;
+            left: 30%;
+        }
+
+        .crater:nth-child(2) {
+            width: 30px;
+            height: 30px;
+            top: 50%;
+            left: 60%;
+        }
+
+        .crater:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 70%;
+            left: 20%;
+        }
+
+        .crater:nth-child(4) {
+            width: 20px;
+            height: 20px;
+            top: 35%;
+            left: 75%;
+        }
+
+        .crater:nth-child(5) {
+            width: 25px;
+            height: 25px;
+            top: 10%;
+            left: 55%;
+        }
+
+        .crater:nth-child(6) {
+            width: 25px;
+            height: 25px;
+            top: 0%;
+            left: 35%;
+        }
+
+        .crater:nth-child(7) {
+            width: 25px;
+            height: 25px;
+            top: 20%;
+            left: 0%;
+        }
+
+        /* Home Text */
+        .home-text {
+            font-size: auto;
+            font-weight: bold;
+            position: relative;
+        }
+
+        @keyframes lanyardFadeIn {
+            0% {
+                opacity: 1;
+                transform:translateY(800px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        /* Lanyard Animation */
+
+        .lanyard {
+            display: block;
+            height: auto;
+            margin: 0 auto;
+
+            animation: lanyardFadeIn 3s ease-in-out;
+
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .lanyard:hover {
+            transform: scale(1.05); 
+        }
+
+        @keyframes homeTextFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-800px); 
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px); 
+            }
+        }
+
+        /* Home Text Animation */
+        .home-text {
+            font-size: auto;
+            font-weight: bold;
+            position: relative;
+            animation: homeTextFadeIn 3s ease-out; 
+        }
+
+        .scroll-cue:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 13px;
+            text-decoration: none;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .scroll-cue span {
+            color: #007BFF;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .domain-section {
+            position: relative;
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 24px;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            scroll-margin-top: 0;
+            scroll-snap-align: start;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .domain-section > :not(.stars):not(.snowflakes) {
+            position: relative;
+            z-index: 1;
+        }
+
+        .domain-section .home-text {
+            font-size: 36px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .domain-section .stars {
+            height: 100%;
+            z-index: 0;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1;
+            animation: skillTextFadeIn 3s ease-out;
+        }
+
+        .skill {
+            cursor: pointer;
+            box-sizing: border-box;
+            background-color: #1a1a1d;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            width: 150px;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .skill:hover {
+            box-shadow: 0 0 10px #f9f3f2, 0 0 80px 8px;
+        }
+
+        .skill-info {
+            display: none;
+            box-sizing: border-box;
+            background-color: #1a1a1d;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            width: min(340px, 90vw);
+            min-height: 200px;
+            text-align: center;
+            box-shadow: 0 0 10px #f9f3f2, 0 0 80px 8px;
+            position: relative;
+            margin-top: 20px;
+            transition: transform 0.5s ease;
+            z-index: 1;
+        }
+
+        .skill-info.show {
+            display: block;
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .meteorite-flight {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+            animation: meteorFall 7.5s linear infinite;
+        }
+
+        .domain-section.skills-page > .meteor-ember-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .meteor-ember {
+            position: absolute;
+            width: var(--ember-size);
+            height: var(--ember-size);
+            border-radius: 50%;
+            background-color: var(--ember-color);
+            box-shadow: 0 0 4px var(--ember-color);
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            animation: emberDrift 1.8s ease-out forwards;
+        }
+
+        .domain-section.skills-page > .meteorite-flight {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .meteorite-flight--one {
+            top: 8%;
+            left: 10%;
+        }
+
+        .meteorite-flight--two {
+            top: 2%;
+            left: 42%;
+            animation-delay: 2.5s;
+        }
+
+        .meteorite-flight--three {
+            top: 12%;
+            left: 74%;
+            animation-delay: 5s;
+        }
+
+        .meteorite-flight img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: meteoriteSpin 3s linear infinite;
+        }
+
+        .skills-tech-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin-top: 36px;
+            z-index: 1;
+            animation: skillTextFadeIn 3s ease-out;
+        }
+
+        .skills-tech-icons img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(86, 185, 255, 0.45));
+            animation: slowSpin 24s linear infinite;
+        }
+
+        .skills-tech-icons img:nth-child(2) { animation-delay: -4s; }
+        .skills-tech-icons img:nth-child(3) { animation-delay: -8s; }
+        .skills-tech-icons img:nth-child(4) { animation-delay: -12s; }
+        .skills-tech-icons img:nth-child(5) { animation-delay: -16s; }
+        .skills-tech-icons img:nth-child(6) { animation-delay: -20s; }
+
+        html.scroll-effects-ready .skills-page .meteorite-flight {
+            animation-play-state: paused;
+        }
+
+        html.scroll-effects-ready .skills-page.scroll-animation-active .meteorite-flight {
+            animation-play-state: running;
+        }
+
+        html.scroll-effects-ready .skills-page .meteorite-flight img {
+            animation-play-state: paused;
+        }
+
+        html.scroll-effects-ready .skills-page.scroll-animation-active .meteorite-flight img {
+            animation-play-state: running;
+        }
+
+        html.scroll-effects-ready .skills-page .skills-tech-icons img {
+            animation-play-state: paused;
+        }
+
+        html.scroll-effects-ready .skills-page.scroll-animation-active .skills-tech-icons img {
+            animation-play-state: running;
+        }
+
+        @keyframes slowSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes meteoriteSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes emberDrift {
+            to {
+                opacity: 0;
+                transform: translate(var(--ember-end-x), var(--ember-end-y)) scale(0.15);
+            }
+        }
+
+        @keyframes meteorFall {
+            0%, 44% {
+                opacity: 0;
+                transform: translate(0, 0) rotate(35deg);
+            }
+            46% {
+                opacity: 1;
+            }
+            74% {
+                opacity: 1;
+                transform: translate(100vw, 75vh) rotate(35deg);
+            }
+            78%, 100% {
+                opacity: 0;
+                transform: translate(100vw, 75vh) rotate(35deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .skills-page .meteorite-flight,
+            .meteorite-flight img {
+                animation: none;
+            }
+
+            .skills-tech-icons img {
+                animation: none;
+            }
+
+            .certificate-ring {
+                transition: none;
+            }
+
+            .certificate-carousel {
+                animation: none;
+            }
+        }
+
+        .project-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            animation: projectTextFadeIn 3s ease-in-out;
+        }
+
+        .project {
+            position: relative;
+            box-sizing: border-box;
+            background-color: #1a1a1d;
+            padding: 20px;
+            font-size: 30px;
+            border: 4px solid #007BFF;
+            border-radius: 10px;
+            color: #fff;
+            width: min(600px, 90vw);
+            height: min(400px, 55vh);
+            min-height: 240px;
+            text-align: center;
+            margin: 10px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .project p {
+            padding: 6px 10px;
+            background: rgba(7, 11, 19, 0.8);
+            border-radius: 5px;
+        }
+
+        .button-class {
+            cursor: pointer;
+            font-size: 20px;
+            padding: 10px;
+            background: #007BFF;
+            color: #fff;
+            border: 0;
+        }
+
+        .button-class:hover {
+            background: #0000ff;
+        }
+
+        .home-text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .certificate-carousel {
+            width: min(820px, 100%);
+            margin-top: 12px;
+            z-index: 1;
+            animation: projectTextFadeIn 3s ease-in-out;
+        }
+
+        .certificate-viewport {
+            --carousel-depth: 330px;
+            --carousel-z: -330px;
+            position: relative;
+            width: 100%;
+            height: 560px;
+            perspective: 1300px;
+            overflow: hidden;
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+        }
+
+        .certificate-viewport:focus-visible {
+            outline: 2px solid #007BFF;
+            outline-offset: -2px;
+        }
+
+        .certificate-ring {
+            --carousel-rotation: 0deg;
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+            transform: translateZ(var(--carousel-z)) rotateY(var(--carousel-rotation));
+            transition: transform 5000ms cubic-bezier(0.2, 0.75, 0.25, 1);
+            will-change: transform;
+        }
+
+        .certificate-viewport:active {
+            cursor: grabbing;
+        }
+
+        .certificate-viewport:focus-visible {
+            outline: 2px solid #007BFF;
+            outline-offset: -2px;
+        }
+
+        .certificate-ring.is-dragging {
+            transition: none;
+        }
+
+        .certificate-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 360px;
+            height: 520px;
+            margin: -260px 0 0 -180px;
+            transform: rotateY(var(--card-angle)) translateZ(var(--carousel-depth));
+            backface-visibility: hidden;
+        }
+
+        .certificate-photo {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #526d91;
+            background-color: #091a33;
+            object-fit: contain;
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
+        }
+
+        .certificate-paper {
+            position: relative;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 24px;
+            border: 1px solid #526d91;
+            background: #091a33;
+            color: #f3f7ff;
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
+        }
+
+        .certificate-paper::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(169, 191, 215, 0.28);
+            pointer-events: none;
+        }
+
+        .certificate-label {
+            display: block;
+            margin-top: 24px;
+            color: #a9bfd7;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .certificate-number {
+            display: block;
+            margin: 16px 0;
+            color: #007BFF;
+            font-size: 72px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .certificate-rule {
+            display: block;
+            width: 58%;
+            height: 1px;
+            margin: 0 auto 12px;
+            background: rgba(169, 191, 215, 0.65);
+        }
+
+        .certificate-note {
+            position: absolute;
+            right: 24px;
+            bottom: 20px;
+            left: 24px;
+            color: rgba(220, 232, 248, 0.72);
+            font-size: 15px;
+        }
+
+        .certificate-count {
+            display: block;
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 14px;
+            font-variant-numeric: tabular-nums;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .certificate-viewport {
+                --carousel-depth: 260px;
+                --carousel-z: -260px;
+                height: 450px;
+                perspective: 1000px;
+            }
+
+            .certificate-card {
+                width: min(280px, calc(100vw - 40px));
+                height: 405px;
+                margin: -202px 0 0 max(-140px, calc((40px - 100vw) / 2));
+            }
+
+            .certificate-paper {
+                padding: 14px;
+            }
+
+            .certificate-paper::before {
+                inset: 5px;
+            }
+
+            .certificate-note {
+                right: 14px;
+                bottom: 12px;
+                left: 14px;
+                font-size: 12px;
+            }
+
+            .certificate-label {
+                margin-top: 12px;
+                font-size: 12px;
+            }
+
+            .certificate-number {
+                margin: 10px 0;
+                font-size: 50px;
+            }
+        }
+
+        .contact-page .skills-list {
+            gap: 20px;
+        }
+
+        .contact-page .skill {
+            width: auto;
+            min-width: 150px;
+            max-width: 320px;
+            padding: 30px;
+            white-space: normal;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .img-github { background-image: url("images/gh_logo.png"); }
+        .img-facebook { background-image: url("images/fb_logo.png"); }
+        .img-instagram { background-image: url("images/insta_logo.png"); }
+
+        .align-center,
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-contact {
+            padding: 10px;
+            background-color: #1a1a1d;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @keyframes projectTextFadeIn {
+            0% { opacity: 0; transform: translateY(700px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes skillTextFadeIn {
+            0% { opacity: 0; transform: translateY(600px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        html.scroll-effects-ready .domain-section .home-text,
+        html.scroll-effects-ready .domain-section .skills-list,
+        html.scroll-effects-ready .domain-section .project-list,
+        html.scroll-effects-ready .certificates-page .certificate-carousel,
+        html.scroll-effects-ready .skills-page .skills-tech-icons {
+            animation-play-state: paused;
+        }
+
+        html.scroll-effects-ready .domain-section.scroll-animation-active .home-text,
+        html.scroll-effects-ready .domain-section.scroll-animation-active .skills-list,
+        html.scroll-effects-ready .domain-section.scroll-animation-active .project-list,
+        html.scroll-effects-ready .certificates-page.scroll-animation-active .certificate-carousel,
+        html.scroll-effects-ready .skills-page.scroll-animation-active .skills-tech-icons {
+            animation-play-state: running;
+        }
+
+        @media (max-width: 600px) {
+            .domain-section {
+                padding: 40px 16px;
+            }
+
+            .domain-section .home-text {
+                font-size: 28px;
+            }
+
+            .certificate-carousel {
+                width: 100%;
+            }
+
+            .project {
+                width: 100%;
+                height: 240px;
+                font-size: 20px;
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <!-- Multiple stars -->
+        <div class="star" style="top: 10%; left: 15%;"></div>
+        <div class="star" style="top: 20%; left: 50%;"></div>
+        <div class="star" style="top: 30%; left: 80%;"></div>
+        <div class="star" style="top: 40%; left: 25%;"></div>
+        <div class="star" style="top: 50%; left: 70%;"></div>
+        <div class="star" style="top: 60%; left: 10%;"></div>
+        <div class="star" style="top: 70%; left: 90%;"></div>
+        <div class="star" style="top: 80%; left: 40%;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a class="nav-left">Nicko A. Triviño</a>
+        
+        <!-- Logo -->
+        <img class="logo" src="images/logo.png" alt="Logo" id="logo">
+
+        <div class="nav-right">
+            <a class="nav-home" href="#home">Home</a>
+            <a class="nav-skills" href="#skills">Skills</a>
+            <a class="nav-projects" href="#projects">Projects</a>
+            <a class="nav-certificates" href="#certificates">Certificates</a>
+            <a class="contacts" href="#contacts">Contacts</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="home-center" id="home">
+        <div class="moon-container">
+            <div class="moon">
+                <div class="crater"></div>
+                <div class="crater"></div>
+                <div class="crater"></div>
+                <div class="crater"></div>
+                <div class="crater"></div>
+                <div class="crater"></div>
+                <div class="crater"></div>
+            </div>
+        </div>
+        <div class="both-container">
+            <div class="zoom-out"></div>
+            <div class="home-text">
+                <h1 class="shimmer">
+                    <span>I am a Student from</span>
+                    <span class="highlight" style="color: crimson;">BatStateU</span>
+                </h1>
+            </div>                      
+            <div class="lanyard-container">
+                <a href="https://discord.com/users/392970361047613441" target="_blank">
+                    <img id="user-image" class="lanyard" src="https://lanyard.cnrad.dev/api/392970361047613441?bg=050a12&idleMessage=Probably%20Sleeping..."/>
+                </a> 
+            </div>    
+        </div>                                                              
+        <a class="scroll-cue" href="#skills">Scroll to explore <span aria-hidden="true">&darr;</span></a>
+    </div>
+
+    <section class="domain-section skills-page" id="skills">
+        <h1 class="home-text">My <span style="color: #4db411;">Skills and Expertise</span></h1>
+
+        <div class="meteor-ember-layer" aria-hidden="true"></div>
+
+        <div class="meteorite-flight meteorite-flight--one" aria-hidden="true">
+            <img src="logo-images/meteorite.png" alt="">
+        </div>
+        <div class="meteorite-flight meteorite-flight--two" aria-hidden="true">
+            <img src="logo-images/meteorite.png" alt="">
+        </div>
+        <div class="meteorite-flight meteorite-flight--three" aria-hidden="true">
+            <img src="logo-images/meteorite.png" alt="">
+        </div>
+
+        <div class="stars">
+            <div class="star" style="top: 10%; left: 15%;"></div>
+            <div class="star" style="top: 20%; left: 50%;"></div>
+            <div class="star" style="top: 30%; left: 80%;"></div>
+            <div class="star" style="top: 40%; left: 25%;"></div>
+            <div class="star" style="top: 50%; left: 70%;"></div>
+            <div class="star" style="top: 60%; left: 10%;"></div>
+            <div class="star" style="top: 70%; left: 90%;"></div>
+            <div class="star" style="top: 80%; left: 40%;"></div>
+        </div>
+
+        <div class="skills-list" id="skills-list">
+            <div class="skill" onclick="showSkillInfo('Python')">Python</div>
+            <div class="skill" onclick="showSkillInfo('Arduino-Uno')">Arduino-Uno</div>
+            <div class="skill" onclick="showSkillInfo('Kali')">Kali</div>
+            <div class="skill" onclick="showSkillInfo('HTML')">HTML / CSS</div>
+            <div class="skill" onclick="showSkillInfo('Typescript')">Typescript</div>
+            <div class="skill" onclick="showSkillInfo('JavaScript')">JavaScript</div>
+        </div>
+
+        <div class="skill-info" id="skill-info">
+            <h2 id="skill-title">Skill Title</h2>
+            <p id="skill-description">Description of the skill.</p>
+            <a href="javascript:void(0);" class="back-btn" onclick="goBack()">Back</a>
+        </div>
+
+        <div class="skills-tech-icons" aria-hidden="true">
+            <img src="logo-images/motherboard.png" alt="">
+            <img src="logo-images/html.png" alt="">
+            <img src="logo-images/linux.png" alt="">
+            <img src="logo-images/python.png" alt="">
+            <img src="logo-images/typescript.png" alt="">
+            <img src="logo-images/css-3.png" alt="">
+        </div>
+
+    </section>
+
+    <section class="domain-section projects-page" id="projects">
+        <h1 class="home-text">My <span style="color: #4db411;">Projects</span></h1>
+
+        <div class="stars">
+            <div class="star" style="top: 10%; left: 15%;"></div>
+            <div class="star" style="top: 20%; left: 50%;"></div>
+            <div class="star" style="top: 30%; left: 80%;"></div>
+            <div class="star" style="top: 40%; left: 25%;"></div>
+            <div class="star" style="top: 50%; left: 70%;"></div>
+            <div class="star" style="top: 60%; left: 10%;"></div>
+            <div class="star" style="top: 70%; left: 90%;"></div>
+            <div class="star" style="top: 80%; left: 40%;"></div>
+        </div>
+
+        <div class="project-list" id="project-list">
+            <div class="project" id="project-box1">
+                <p id="project-title">Automated Waste Segregator EdgeImpuse</p>
+            </div>
+            <button onclick="nextProject()" class="button-class" aria-label="Next project">&gt;</button>
+        </div>
+    </section>
+
+    <section class="domain-section certificates-page" id="certificates">
+        <div class="home-text-container">
+            <h1 class="home-text">
+                My <span class="home-text-3" style="color: #4db411;">Certificates</span>
+            </h1>
+        </div>
+
+        <div class="certificate-carousel" role="region" aria-label="Certificate gallery">
+            <div class="certificate-viewport" role="group" tabindex="0" aria-label="Drag to rotate certificates, or use the left and right arrow keys">
+                <div class="certificate-ring">
+                    <article class="certificate-card" style="--card-angle: 0deg;" aria-label="Certificate 1">
+                        <img class="certificate-photo" src="certificate-images/certificate1.jpeg" alt="Certificate of completion for the IBM Bob 2.0 hackathon, awarded to Nicko Trivino">
+                    </article>
+                    <article class="certificate-card" style="--card-angle: 72deg;" aria-label="Certificate 2">
+                        <img class="certificate-photo" src="certificate-images/certificate2.jpg" alt="Certificate 2">
+                    </article>
+                    <article class="certificate-card" style="--card-angle: 144deg;" aria-label="Certificate 3">
+                        <div class="certificate-paper">
+                            <span class="certificate-label">Certificate</span>
+                            <strong class="certificate-number">03</strong>
+                            <span class="certificate-rule"></span>
+                            <span class="certificate-note">To be added soon.</span>
+                        </div>
+                    </article>
+                    <article class="certificate-card" style="--card-angle: 216deg;" aria-label="Certificate 4">
+                        <div class="certificate-paper">
+                            <span class="certificate-label">Certificate</span>
+                            <strong class="certificate-number">04</strong>
+                            <span class="certificate-rule"></span>
+                            <span class="certificate-note">To be added soon.</span>
+                        </div>
+                    </article>
+                    <article class="certificate-card" style="--card-angle: 288deg;" aria-label="Certificate 5">
+                        <div class="certificate-paper">
+                            <span class="certificate-label">Certificate</span>
+                            <strong class="certificate-number">05</strong>
+                            <span class="certificate-rule"></span>
+                            <span class="certificate-note">To be added soon.</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <output class="certificate-count" id="certificate-count" aria-live="polite">1 / 5</output>
+        </div>
+
+        <div class="stars">
+            <div class="star" style="top: 10%; left: 15%;"></div>
+            <div class="star" style="top: 20%; left: 50%;"></div>
+            <div class="star" style="top: 30%; left: 80%;"></div>
+            <div class="star" style="top: 40%; left: 25%;"></div>
+            <div class="star" style="top: 50%; left: 70%;"></div>
+            <div class="star" style="top: 60%; left: 10%;"></div>
+            <div class="star" style="top: 70%; left: 90%;"></div>
+            <div class="star" style="top: 80%; left: 40%;"></div>
+        </div>
+    </section>
+
+    <section class="domain-section contact-page" id="contacts">
+        <h1 class="home-text">My <span style="color: #4db411;">Contacts</span></h1>
+
+        <div class="stars">
+            <div class="star" style="top: 10%; left: 15%;"></div>
+            <div class="star" style="top: 20%; left: 50%;"></div>
+            <div class="star" style="top: 30%; left: 80%;"></div>
+            <div class="star" style="top: 40%; left: 25%;"></div>
+            <div class="star" style="top: 50%; left: 70%;"></div>
+            <div class="star" style="top: 60%; left: 10%;"></div>
+            <div class="star" style="top: 70%; left: 90%;"></div>
+            <div class="star" style="top: 80%; left: 40%;"></div>
+        </div>
+
+        <div class="skills-list" id="contact-list">
+            <div class="skill">
+                <h3>Details</h3>
+                <div class="details-container">
+                    <p><span style="background-color:#34346d; border-radius: 5px;">Name</span> Trivino, Nicko A.</p>
+                    <p><span style="background-color:#34346d; border-radius: 5px;">Age</span> 20 Years Old</p>
+                    <p><span style="background-color:#34346d; border-radius: 5px;">Resides</span> Libjo Central, Batangas City</p>
+                    <p><span style="background-color:#34346d; border-radius: 5px;">School</span> BatStatU</p>
+                </div>
+            </div>
+            <div class="skill">
+                <h3>Socials</h3>
+                <div class="social-icons">
+                    <a href="https://github.com/ZzzSleepyy" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><div class="social-icon img-github"></div></a>
+                    <a href="https://www.facebook.com/niqouu/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><div class="social-icon img-facebook"></div></a>
+                    <a href="https://www.instagram.com/niqouu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><div class="social-icon img-instagram"></div></a>
+                </div>
+                <div class="align-center">
+                    <p><span style="background-color:#34346d; border-radius: 5px;">Github</span> ZzzSleepyy</p>
+                    <p><span style="background-color:#34346d; border-radius: 5px;">Facebook</span> Nicko A. Trivino</p>
+                    <p><span style="background-color:#34346d; border-radius: 5px;">Instagram</span> niqouu</p>
+                </div>
+            </div>
+            <div class="skill">
+                <h3>About Me</h3>
+                <p>I'm Nicko, a passionate web developer with expertise in front-end technologies. I am also a competitive programmer with a keen interest in problem-solving and algorithm design. I enjoy constantly learning new concepts and techniques, and I strive to apply them in real-world projects. My goal is to create efficient, user-friendly web applications while continuously honing my skills in both development and programming.</p>
+                <a href="https://docs.google.com/forms/d/1OCa30FanvS3vaLqEHHSYlLCMyybwXyslSAfG2IQmQcs" target="_blank" rel="noopener noreferrer"><button class="button-contact" type="button">Contact me!</button></a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const logo = document.getElementById('logo');
+        const navRight = document.querySelector('.nav-right');
+
+        logo.addEventListener('click', function() {
+            navRight.classList.toggle('active');
+        });
+
+        let imageRefreshInProgress = false;
+
+        function reloadImage() {
+            if (imageRefreshInProgress) {
+                return;
+            }
+
+            const image = document.getElementById("user-image");
+            const refreshedUrl = new URL(image.src);
+            refreshedUrl.searchParams.set('bg', '050a12');
+            refreshedUrl.searchParams.set('t', Date.now().toString());
+
+            const preloadedImage = new Image();
+            imageRefreshInProgress = true;
+
+            preloadedImage.onload = () => {
+                image.src = preloadedImage.src;
+                imageRefreshInProgress = false;
+            };
+
+            preloadedImage.onerror = () => {
+                imageRefreshInProgress = false;
+            };
+
+            preloadedImage.src = refreshedUrl.toString();
+        }
+
+        setInterval(reloadImage, 3000);
+
+        const skillDescriptions = {
+            'Python': 'Creations: Sequence Query Languages, Application, and Artificial Intelligence.',
+            'Arduino-Uno': 'Created: Artificial Intelligence.',
+            'Kali': 'Ethically Tested: Nmap, Netcat, and Metasploit',
+            'HTML': 'Created: Webpages',
+            'Typescript': 'Created: Discord Presence and Metadata',
+            'JavaScript': 'Created: Dynamic and interactive web pages.'
+        };
+
+        function showSkillInfo(skill) {
+            const skillsList = document.getElementById('skills-list');
+            skillsList.style.visibility = 'hidden';
+            skillsList.style.position = 'absolute';
+
+            const skillInfo = document.getElementById('skill-info');
+            document.getElementById('skill-title').textContent = skill;
+            document.getElementById('skill-description').textContent = skillDescriptions[skill] || 'No description available for this skill.';
+            skillInfo.classList.add('show');
+        }
+
+        function goBack() {
+            const skillInfo = document.getElementById('skill-info');
+            const skillsList = document.getElementById('skills-list');
+
+            skillInfo.classList.remove('show');
+            skillsList.style.display = 'flex';
+            skillsList.style.visibility = 'visible';
+            skillsList.style.position = 'relative';
+        }
+
+        let currentProject = 0;
+        const projects = [
+            {
+                title: 'ESP32-S and Arduino-Uno EdgeImpuse Waste Segregator',
+                imageUrl: 'project-images/project1.png'
+            },
+            {
+                title: 'Presence Development: Lazada',
+                imageUrl: 'project-images/project2.PNG'
+            },
+            {
+                title: 'Bot Development: RPS',
+                imageUrl: 'project-images/project3.png'
+            }
+        ];
+
+        function showProject() {
+            const projectBox = document.getElementById('project-box1');
+            const project = projects[currentProject];
+            projectBox.querySelector('p').textContent = project.title;
+            projectBox.style.backgroundImage = `url(${project.imageUrl})`;
+        }
+
+        function nextProject() {
+            currentProject = (currentProject + 1) % projects.length;
+            showProject();
+        }
+
+        showProject();
+
+        const certificateCarousel = document.querySelector('.certificate-carousel');
+        const certificateViewport = certificateCarousel.querySelector('.certificate-viewport');
+        const certificateRing = certificateCarousel.querySelector('.certificate-ring');
+        const certificateCards = certificateRing.querySelectorAll('.certificate-card');
+        const certificateCount = document.getElementById('certificate-count');
+        let currentCertificate = 0;
+        let certificateRotation = 0;
+        let draggingCertificates = false;
+        let dragStartX = 0;
+        let dragStartRotation = 0;
+
+        function setCertificateRotation(rotation) {
+            certificateRotation = rotation;
+            certificateRing.style.setProperty('--carousel-rotation', `${rotation}deg`);
+            const step = 360 / certificateCards.length;
+            currentCertificate = ((Math.round(-rotation / step) % certificateCards.length) + certificateCards.length) % certificateCards.length;
+            certificateCount.textContent = `${currentCertificate + 1} / ${certificateCards.length}`;
+        }
+
+        function rotateCertificates(direction) {
+            const step = 360 / certificateCards.length;
+            setCertificateRotation(-(currentCertificate + direction) * step);
+        }
+
+        function finishCertificateDrag(event) {
+            if (!draggingCertificates) {
+                return;
+            }
+
+            draggingCertificates = false;
+            certificateRing.classList.remove('is-dragging');
+            const step = 360 / certificateCards.length;
+            const nearestCertificate = Math.round(-certificateRotation / step);
+            setCertificateRotation(-nearestCertificate * step);
+
+            if (certificateViewport.hasPointerCapture(event.pointerId)) {
+                certificateViewport.releasePointerCapture(event.pointerId);
+            }
+        }
+
+        certificateViewport.addEventListener('pointerdown', (event) => {
+            if (event.pointerType === 'mouse' && event.button !== 0) {
+                return;
+            }
+
+            draggingCertificates = true;
+            dragStartX = event.clientX;
+            dragStartRotation = certificateRotation;
+            certificateRing.classList.add('is-dragging');
+            certificateViewport.setPointerCapture(event.pointerId);
+            event.preventDefault();
+        });
+
+        certificateViewport.addEventListener('pointermove', (event) => {
+            if (draggingCertificates) {
+                setCertificateRotation(dragStartRotation + (event.clientX - dragStartX) * 0.45);
+            }
+        });
+
+        certificateViewport.addEventListener('pointerup', finishCertificateDrag);
+        certificateViewport.addEventListener('pointercancel', finishCertificateDrag);
+        certificateViewport.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                rotateCertificates(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+        });
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const sections = document.querySelectorAll('.domain-section');
+            let previousScrollY = window.scrollY;
+            document.documentElement.classList.add('scroll-effects-ready');
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                const scrollingDown = currentScrollY > previousScrollY;
+                previousScrollY = currentScrollY;
+
+                if (!scrollingDown) {
+                    return;
+                }
+
+                sections.forEach((section) => {
+                    if (section.classList.contains('scroll-animation-active')) {
+                        return;
+                    }
+
+                    const sectionBounds = section.getBoundingClientRect();
+                    if (sectionBounds.top < window.innerHeight * 0.8 && sectionBounds.bottom > 0) {
+                        section.classList.add('scroll-animation-active');
+                    }
+                });
+            }, { passive: true });
+
+            const skillsSection = document.querySelector('.skills-page');
+            const emberLayer = skillsSection.querySelector('.meteor-ember-layer');
+            const meteoriteFlights = skillsSection.querySelectorAll('.meteorite-flight');
+            const emberColors = ['#ff3215', '#ff7a12', '#ff2414', '#ffd02a', '#ff4a12'];
+            const lastEmberAt = new WeakMap();
+
+            setInterval(() => {
+                if (!skillsSection.classList.contains('scroll-animation-active')) {
+                    return;
+                }
+
+                const sectionBounds = skillsSection.getBoundingClientRect();
+                if (sectionBounds.bottom <= 0 || sectionBounds.top >= window.innerHeight) {
+                    return;
+                }
+
+                const now = performance.now();
+                meteoriteFlights.forEach((flight) => {
+                    const flightBounds = flight.getBoundingClientRect();
+                    const flightOpacity = Number.parseFloat(getComputedStyle(flight).opacity);
+                    const previousEmberAt = lastEmberAt.get(flight) || 0;
+
+                    if (flightOpacity < 0.8 || now - previousEmberAt < 120) {
+                        return;
+                    }
+
+                    lastEmberAt.set(flight, now);
+
+                    for (let particleIndex = 0; particleIndex < 4; particleIndex++) {
+                        const ember = document.createElement('span');
+                        const trailX = 16 + Math.random() * 72;
+                        const driftY = (Math.random() - 0.5) * 120;
+                        const sourceX = 0.25 + Math.random() * 0.5;
+                        const sourceY = 0.5 + (Math.random() - 0.5) * 0.4;
+                        ember.className = 'meteor-ember';
+                        ember.style.left = `${flightBounds.left - sectionBounds.left + flightBounds.width * sourceX}px`;
+                        ember.style.top = `${flightBounds.top - sectionBounds.top + flightBounds.height * sourceY}px`;
+                        ember.style.setProperty('--ember-size', `${2.5 + Math.random() * 3.5}px`);
+                        ember.style.setProperty('--ember-color', emberColors[Math.floor(Math.random() * emberColors.length)]);
+                        ember.style.setProperty('--ember-end-x', `calc(-50% - ${trailX}px)`);
+                        ember.style.setProperty('--ember-end-y', `calc(-50% + ${driftY}px)`);
+                        ember.addEventListener('animationend', () => ember.remove(), { once: true });
+                        emberLayer.append(ember);
+                    }
+                });
+            }, 120);
+        }
+    </script>
+</body>
+</html>
